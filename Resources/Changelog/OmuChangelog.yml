@@ -1094,3 +1094,13 @@ Entries:
       message: Cleaned up security loadout screen
   id: 128
   time: '2025-11-08T08:31:20.0000000+00:00'
+- author: RadsammyT
+  changes:
+    - type: Add
+      message: >-
+        Salvage have been given their own pinpointers because they keep dying so
+        fucking much. They can be found in their respective salvage lockers.
+        They only lock onto an individual salvage ID, are used for
+        search-and-rescue operations, and reports on movement inactivity.
+  id: 129
+  time: '2025-11-08T08:45:44.0000000+00:00'

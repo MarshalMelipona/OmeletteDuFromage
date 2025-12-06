@@ -1337,3 +1337,13 @@ Entries:
         command only so HANDS OFF!
   id: 161
   time: '2025-12-06T17:18:49.0000000+00:00'
+- author: NotActuallyMarty,
+  changes:
+    - type: Add
+      message: Xelthia have arrived! Squid people. They don't have hands.
+    - type: Add
+      message: Squid voice bark for Xelthia.
+    - type: Add
+      message: Special gloved-jackets for those lacking hands.
+  id: 162
+  time: '2025-12-06T17:24:19.0000000+00:00'

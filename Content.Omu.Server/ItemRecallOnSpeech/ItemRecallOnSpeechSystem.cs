@@ -15,15 +15,11 @@ public sealed class ItemRecallOnSpeechSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ItemRecallOnSpeechComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<ItemRecallOnSpeechComponent, ComponentShutdown>(OnComponentShutdown);
 
         SubscribeLocalEvent<ItemRecallOnSpeechComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
     }
 
-
-    private void OnComponentStartup(Entity<ItemRecallOnSpeechComponent> recallable, ref ComponentStartup args) =>
-        _delaySystem.SetLength(recallable.Owner, recallable.Comp.RecallCooldown, recallable.Comp.UseDelayId);
     private void OnComponentShutdown(Entity<ItemRecallOnSpeechComponent> recallable, ref ComponentShutdown args)
     {
         // Otherwise shit goes boom lmfao.
@@ -60,6 +56,8 @@ public sealed class ItemRecallOnSpeechSystem : EntitySystem
     {
         if (recallable.Comp.EntityToRecallTo != null)
             return;
+
+        _delaySystem.SetLength(recallable.Owner, recallable.Comp.RecallCooldown, recallable.Comp.UseDelayId);
 
         recallable.Comp.EntityToRecallTo = entity;
 

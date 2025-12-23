@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
@@ -23,6 +24,12 @@ public sealed partial class ItemRecallOnSpeechComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan RecallCooldown = TimeSpan.FromSeconds(60f);
+
+    /// <summary>
+    /// How much damage is dealt when recalled.
+    /// </summary>
+    [DataField(required: true)]
+    public DamageSpecifier DamageOnRecall = null!;
 
     /// <summary>
     /// The ID for the use delay.

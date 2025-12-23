@@ -30,6 +30,9 @@
     effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
     recallCooldown: 60 # In seconds
+    DamageOnRecall:
+      types:
+        Heat: 10
   - type: Tag
     tags:
     - Nullrod
@@ -674,6 +677,9 @@
     effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
     recallCooldown: 60 # In seconds
+    DamageOnRecall:
+      types:
+        Heat: 5 # Halved because there's two.
 
 - type: entity
   name: jackal

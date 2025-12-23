@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 using Content.Server.Chat.Systems;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Damage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
@@ -20,6 +22,7 @@ public sealed class ItemRecallOnSpeechUserSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = null!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UseDelaySystem _delaySystem = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -80,6 +83,9 @@ public sealed class ItemRecallOnSpeechUserSystem : EntitySystem
             // vfx
             Spawn(pending.Comp.EffectProto, Transform(target).Coordinates);
             _audio.PlayPvs(pending.Comp.SoundPath, target, AudioParams.Default.WithVolume(-4f));
+
+            // damage
+            _damageable.TryChangeDamage(target, pending.Comp.DamageOnRecall, true, targetPart: TargetBodyPart.Hands);
         }
     }
 

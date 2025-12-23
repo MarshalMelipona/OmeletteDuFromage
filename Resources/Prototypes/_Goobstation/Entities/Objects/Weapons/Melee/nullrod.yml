@@ -26,6 +26,10 @@
     - NONE
   - type: DisarmMalus
     malus: 0
+  - type: ItemRecallOnSpeech # Omu - Recall!
+    effectProto: EffectSpark
+    soundPath: /Audio/Effects/hallelujah.ogg
+    recallCooldown: 60 # In seconds
   - type: Tag
     tags:
     - Nullrod
@@ -666,6 +670,10 @@
   - type: ReloadOnPray
   - type: AlternatePrayable # needs this, since it ain't parented of nullrod.
     prayDoAfterDuration: 3.5
+  - type: ItemRecallOnSpeech # Omu - Recall!
+    effectProto: EffectSpark
+    soundPath: /Audio/Effects/hallelujah.ogg
+    recallCooldown: 60 # In seconds
 
 - type: entity
   name: jackal
@@ -708,7 +716,7 @@
         Slash: 25
         Piercing: 15
         Holy: 10
-       
+
 - type: entity
   parent: BaseNullrod
   id: RatvarianSpear

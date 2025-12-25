@@ -1,3 +1,4 @@
+using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -26,9 +27,21 @@ public sealed partial class ItemRecallOnSpeechComponent : Component
     public TimeSpan RecallCooldown = TimeSpan.FromSeconds(60f);
 
     /// <summary>
+    /// Should this item damage the user when recalled?
+    /// </summary>
+    [DataField]
+    public bool DoDamageOnRecall = true;
+
+    /// <summary>
+    /// Which part to damage when recalled?
+    /// </summary>
+    [DataField]
+    public TargetBodyPart PartToDamage = TargetBodyPart.Hands;
+
+    /// <summary>
     /// How much damage is dealt when recalled.
     /// </summary>
-    [DataField(required: true)]
+    [DataField]
     public DamageSpecifier DamageOnRecall = null!;
 
     /// <summary>

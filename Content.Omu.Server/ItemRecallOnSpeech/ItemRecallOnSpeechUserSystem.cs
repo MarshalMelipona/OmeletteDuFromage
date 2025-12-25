@@ -72,20 +72,22 @@ public sealed class ItemRecallOnSpeechUserSystem : EntitySystem
 
         foreach (var (pending, target) in itemsPendingRecall)
         {
-            // actually teleport
+            // To the hands!
             _transform.SetCoordinates(pending, Transform(target).Coordinates);
             _hands.TryPickupAnyHand(target, pending);
 
-            // do cooldown
+            // Cooldown!
             if (TryComp<UseDelayComponent>(pending, out var useDelay))
                 _delaySystem.TryResetDelay((pending, useDelay), true, pending.Comp.UseDelayId);
 
-            // vfx
+            // Pizazz!
             Spawn(pending.Comp.EffectProto, Transform(target).Coordinates);
             _audio.PlayPvs(pending.Comp.SoundPath, target, AudioParams.Default.WithVolume(-4f));
 
-            // damage
-            _damageable.TryChangeDamage(target, pending.Comp.DamageOnRecall, true, targetPart: TargetBodyPart.Hands);
+            // If damage is set, then damage!
+            // This is purposefully configurable so you can make weird admin shit with it. Go ham.
+            if (pending.Comp is { DoDamageOnRecall: true, DamageOnRecall: { } damageOnRecall })
+                _damageable.TryChangeDamage(target, damageOnRecall, true, targetPart: pending.Comp.PartToDamage);
         }
     }
 

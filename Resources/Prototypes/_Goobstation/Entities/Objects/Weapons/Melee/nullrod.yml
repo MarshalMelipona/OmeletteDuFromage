@@ -30,7 +30,7 @@
     effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
     recallCooldown: 60 # In seconds
-    DamageOnRecall:
+    damageOnRecall:
       types:
         Heat: 10
   - type: Tag
@@ -677,7 +677,7 @@
     effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
     recallCooldown: 60 # In seconds
-    DamageOnRecall:
+    damageOnRecall:
       types:
         Heat: 5 # Halved because there's two.
 

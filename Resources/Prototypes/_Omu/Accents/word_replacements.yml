@@ -1,0 +1,5 @@
+- type: accent
+  id: voidwalker
+  wordReplacements:
+    accent-voidwalker-words-1: accent-voidwalker-words-replace-1
+    accent-voidwalker-words-2: accent-voidwalker-words-replace-2

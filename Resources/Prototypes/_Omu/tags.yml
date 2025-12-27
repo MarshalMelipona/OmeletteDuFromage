@@ -6,7 +6,10 @@
 
 - type: Tag
   id: Stunsword
-  
+
+- type: Tag
+  id: Grille
+
 - type: Tag
   id: HudChemistry
 

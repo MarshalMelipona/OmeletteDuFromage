@@ -12,4 +12,4 @@ objective-condition-steal-smsliver-description = Use any cutting tool that comes
 
 steal-target-groups-battery = Power Cell
 
-objective-condition-steal-gemini-projector-description = If the Research Director is using it you'll have to pry off their spine. Removing it will take some preperation, so we recommend you make a diversion and bring them somewhere secure.
+objective-condition-steal-gemini-projector-description = If the Research Director is using it you'll have to pry off their spine. Removing it will take some preparation, so we recommend you make a diversion and bring them somewhere secure.

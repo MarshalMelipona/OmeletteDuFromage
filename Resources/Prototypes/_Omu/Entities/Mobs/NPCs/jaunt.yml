@@ -1,31 +1,25 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  id: PolymorphBloodCrawlJaunt
+  id: PolymorphVoidCrawlJaunt
   name: Unknown
   description: You can't figure out what that is.
   parent: [ Incorporeal, BaseMob ]
   components:
   - type: Sprite
-    sprite: Structures/Specific/Anomalies/Cores/flesh_core.rsi
-    state: core
+    sprite: _Omu/Mobs/Voidwalker/voidwalker.rsi
+    state: stealthed
   - type: MovementSpeedModifier
     baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: Input
     context: "ghost"
   - type: NoSlip
-  - type: ReagentCrawl # Omu
+  - type: ReagentCrawl
     isCrawling: true
+    actionId: VoidwalkerNebulaCrawlAction
     targetReagent:
-    - Blood
-    - AmmoniaBlood
-    - InsectBlood
-    - CopperBlood
-  - type: DemonicWhisper
+      - NebulaVomit
+    enterJauntFailMessage: voidwalker-nebula-jaunt-fail
+    jaunt: VoidCrawlJaunt
   - type: Visibility
     layer: 2
   - type: Spectral
@@ -38,7 +32,16 @@
     showExamineInfo: true
   - type: ActionGrant
     actions:
-    - DemonicWhisperAction
-  - type: Muted # 古布空间站 - ARMOK 1984
+    - VoidwalkerVoidWhisperAction
+  - type: VoidWhisper
+  - type: Muted
   - type: IsDeadIC
     dead: false
+
+- type: polymorph
+  id: VoidCrawlJaunt
+  configuration:
+    entity: PolymorphVoidCrawlJaunt
+    forced: true
+    attachToGridOrMap: true
+    showPopup: false

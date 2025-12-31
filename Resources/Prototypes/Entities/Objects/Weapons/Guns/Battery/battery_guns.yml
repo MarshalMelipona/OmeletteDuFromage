@@ -1243,12 +1243,12 @@
     fireModes:
     - proto: BulletTemperatureCold
       fireCost: 100
-      name: cooling
-      state: cooling
+      name: cooling # Omu
+      state: cooling # Omu
     - proto: BulletTemperatureHot
       fireCost: 100
-      name: heating
-      state: heating
+      name: heating # Omu
+      state: heating # Omu
   - type: Battery
     maxCharge: 2500 # Goobstation - 1000 -> 2500
     startingCharge: 2500 # 1000 -> 2500

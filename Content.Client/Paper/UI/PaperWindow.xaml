@@ -1,5 +1,4 @@
 <!--
-<!--Ported from RMC-->
 SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
 SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
 SPDX-FileCopyrightText: 2023 Echo <SammyPawsM@gmail.com>
@@ -30,8 +29,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <TextureButton Name="HeaderImage" HorizontalAlignment="Center" VerticalAlignment="Top" MouseFilter="Ignore"/>
                         <Control Name="TextAlignmentPadding" VerticalAlignment="Top"/>
                         <RichTextLabel Name="BlankPaperIndicator" StyleClasses="LabelSecondaryColor" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                        <RichTextLabel Name="WrittenTextLabel" VerticalAlignment="Top"/>
-                        <BoxContainer Name="WrittenTextContainer" Orientation="Horizontal" VerticalAlignment="Top" StyleClasses="PaperWrittenText">
+                        <RichTextLabel Name="WrittenTextLabel" VerticalAlignment="Top"/> <!--Ported from RMC-->
+                        <BoxContainer Name="WrittenTextContainer" Orientation="Horizontal" VerticalAlignment="Top" StyleClasses="PaperWrittenText"> <!--Ported from RMC-->
                         </BoxContainer>
                         <BoxContainer Name="InputContainer" Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Stretch">
                             <PanelContainer StyleClasses="TransparentBorderedWindowPanel" MinHeight="100"

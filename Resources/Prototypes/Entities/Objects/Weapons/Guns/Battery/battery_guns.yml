@@ -1232,7 +1232,7 @@
   - type: Clothing
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/tempgun.rsi # Goobstation
   - type: Gun
-    fireRate: 2
+    fireRate: 2 # Omu
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg # Omu
     soundEmpty:

@@ -108,7 +108,7 @@ public sealed class BatteryDrinkerSystem : SharedBatteryDrinkerSystem
             DistanceThreshold = 1.35f,
             RequireCanInteract = true,
             CancelDuplicate = false,
-            MultiplyDelay = false,
+            MultiplyDelay = false, // Goobstation
         };
 
         _doAfter.TryStartDoAfter(args);

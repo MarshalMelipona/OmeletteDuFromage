@@ -1,13 +1,16 @@
 using Content.Omu.Shared.VoltLeech;
 using Content.Server.Emp;
+using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Utility;
@@ -24,6 +27,7 @@ public sealed partial class CreatureBatteryDrinkerSystem : EntitySystem
     [Dependency] private readonly BatterySystem _battery = null!;
     [Dependency] private readonly SharedPopupSystem _popup = null!;
     [Dependency] private readonly SharedAudioSystem _audio = null!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = null!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -40,7 +44,8 @@ public sealed partial class CreatureBatteryDrinkerSystem : EntitySystem
 
         if (!args.CanAccess
             || !args.CanInteract
-            || !CanDrinkEntity(target))
+            || !CanDrinkEntity(target)
+            || target == drinker.Owner)
             return;
 
         InnateVerb verb = new()
@@ -71,6 +76,8 @@ public sealed partial class CreatureBatteryDrinkerSystem : EntitySystem
             BreakOnMove = true,
             BlockDuplicate = true,
             BreakOnHandChange = true,
+            RequireCanInteract = true,
+            NeedHand = true,
         };
 
         _doAfter.TryStartDoAfter(doAfterArgs);
@@ -87,6 +94,8 @@ public sealed partial class CreatureBatteryDrinkerSystem : EntitySystem
             || !CanDrinkEntity(target))
             return;
 
+        args.Repeat = !_battery.IsFull(drinker);
+
         if (!args.Repeat)
         {
             var popup = Loc.GetString("creature-battery-drinker-end-drink", ("target", target), ("drinker", drinker));
@@ -94,19 +103,17 @@ public sealed partial class CreatureBatteryDrinkerSystem : EntitySystem
         }
         else
         {
-            var popup = Loc.GetString("creature-battery-drinker-continue-drink", ("target", target), ("drinker", drinker));
+            var popup = Loc.GetString("creature-battery-drinker-continue-drink", ("target", target));
             _popup.PopupEntity(popup, target, PopupType.MediumCaution);
         }
 
-        args.Repeat = !_battery.IsFull(drinker);
-
         // Target is a robot, EMP and deal less damage.
-        if (TryComp<SiliconComponent>(target, out var clanker))
+        if (TryComp<BatteryComponent>(target, out var battery))
         {
-            if (clanker.Dead)
+            if (battery.CurrentCharge <= 0)
                 return;
 
-            _emp.TryEmpEffects(target, 0, drinker.Comp.EmpDuration);
+            _emp.TryEmpEffects(target, drinker.Comp.EnergyGained, drinker.Comp.EmpDuration);
             _damage.TryChangeDamage(target, drinker.Comp.DamageOnDrain / 2, true, targetPart: TargetBodyPart.Chest);
         }
         else // Not a robot, but alive and has a mind, so just burn the shizz outta it
@@ -115,6 +122,7 @@ public sealed partial class CreatureBatteryDrinkerSystem : EntitySystem
         }
 
         _battery.AddCharge(drinker, drinker.Comp.EnergyGained); // temp value
+        _stamina.TakeStaminaDamage(target, drinker.Comp.StaminaDamageOnDrain);
         _audio.PlayPvs(drinker.Comp.DrinkSound, target);
     }
 

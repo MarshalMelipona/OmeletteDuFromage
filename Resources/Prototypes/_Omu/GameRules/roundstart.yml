@@ -1,0 +1,24 @@
+- type: entity
+  parent: BaseGameRule
+  id: VoltLeech
+  components:
+  - type: VoltLeechRule
+  - type: GameRule
+    minPlayers: 15
+  #- type: AntagObjectives # Finish this later
+  #  objectives:
+  #  - DevilContractObjective
+  #  - DevilWeightObjective
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    agentName: volt-leech-roundend-name
+    definitions:
+    - prefRoles: [ VoltLeech ]
+      max: 1
+      playerRatio: 30
+      chaosScore: 130
+      mindRoles:
+      - VoltLeechMindRole
+  - type: Tag
+    tags:
+    - RoundstartAntag

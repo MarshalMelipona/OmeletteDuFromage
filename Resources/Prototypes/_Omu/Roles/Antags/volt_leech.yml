@@ -1,0 +1,7 @@
+- type: antag
+  id: VoltLeech
+  name: roles-antag-volt-leech-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-volt-leech-description
+  #guides: [ VoltLeech ] # Do this later

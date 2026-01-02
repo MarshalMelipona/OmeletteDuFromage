@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
+using Content.Omu.Server.VoltLeech.GameTicking.Rules;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -17,22 +18,22 @@ public sealed partial class OmuAdminVerbSystem
         if (!AntagVerbAllowed(args, out var targetPlayer))
             return;
 
-        // Arc demons
-        Verb arcDemon = new()
+        // volt Leeches
+        Verb voltLeech = new()
         {
-            Text = Loc.GetString("admin-verb-text-make-arc-demon"),
+            Text = Loc.GetString("admin-verb-text-make-volt-leech"),
             Category = VerbCategory.Antag,
             Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Goobstation/Changeling/changeling_abilities.rsi"), "transform"), // change this
             Act = () =>
             {
                 if (!HasComp<SiliconComponent>(args.Target))
-                    _antag.ForceMakeAntag<ChangelingRuleComponent>(targetPlayer, "Changeling"); // change this
+                    _antag.ForceMakeAntag<VoltLeechRuleComponent>(targetPlayer, "VoltLeech"); // change this
             },
             Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-arc-demon"),
+            Message = Loc.GetString("admin-verb-make-volt-leech"),
         };
         if (!HasComp<SiliconComponent>(args.Target))
-            args.Verbs.Add(arcDemon);
+            args.Verbs.Add(voltLeech);
     }
 
     public bool AntagVerbAllowed(GetVerbsEvent<Verb> args, [NotNullWhen(true)] out ICommonSession? target)

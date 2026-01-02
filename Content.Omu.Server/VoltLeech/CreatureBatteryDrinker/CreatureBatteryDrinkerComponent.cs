@@ -1,6 +1,7 @@
 using Content.Shared.Damage;
+using Robust.Shared.Audio;
 
-namespace Content.Omu.Server.ArcDemon.CreatureBatteryDrinker;
+namespace Content.Omu.Server.VoltLeech.CreatureBatteryDrinker;
 
 /// <summary>
 /// It's named this because "CreatureDrinkerComponent" feels wrong.
@@ -16,11 +17,10 @@ public sealed partial class CreatureBatteryDrinkerComponent : Component
     public TimeSpan DrinkSpeed = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
-    ///     The multiplier for the amount of power to attempt to drink.
-    ///     Default amount is 1000
+    /// The power gained from absorbing a sentient entity is equal to this number.
     /// </summary>
     [DataField]
-    public float DrinkMultiplier = 5f;
+    public float EnergyGained = 100f;
 
     /// <summary>
     /// How much damage is dealt to a creature each tick they are drained.
@@ -31,7 +31,7 @@ public sealed partial class CreatureBatteryDrinkerComponent : Component
     {
         DamageDict =
         {
-            ["Burn"] = 5,
+            ["Heat"] = 5,
         },
     };
 
@@ -43,4 +43,10 @@ public sealed partial class CreatureBatteryDrinkerComponent : Component
 
     [DataField]
     public float EmpDuration = 1f;
+
+    /// <summary>
+    ///     The sound to play when drinking
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? DrinkSound = new SoundCollectionSpecifier("sparks");
 }
